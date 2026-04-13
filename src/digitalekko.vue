@@ -133,8 +133,7 @@
         <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h3 class="text-lg font-semibold text-slate-900">Direktori Utama</h3>
-            <p class="text-sm text-slate-500">Tampilan kartu yang rapi untuk penelusuran cepat dan nyaman.</p>
-          </div>
+              </div>
 
           <div class="flex flex-wrap gap-3">
             
