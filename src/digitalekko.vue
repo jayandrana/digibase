@@ -235,7 +235,7 @@ const error = ref(null)
 
 onMounted(async () => {
   try {
-    const apiUrl = 'http://localhost:3000/api/products'
+    const apiUrl = 'https://digidbase.statsbali.id/api/products'
     const response = await axios.get(apiUrl)
 
     // Simulate delay before setting data
