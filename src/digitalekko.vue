@@ -163,18 +163,26 @@
     <div v-else>
       <div v-for="item in filteredItems" :key="item.id" class="card">
         <h3>{{ item.nama_usaha }}</h3>
-        <p>{{ item.alamat }}</p>
+          <p>
+          <a 
+            :href="`https://www.google.com/maps?q=${item.latitude},${item.longitude}`" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            {{ item.alamat }}
+          </a>
+        </p>
         <span>{{ item.kabupaten }} - {{ item.subsektor }}</span>
 
         <!-- Instagram -->
         <div v-if="item.instagram && item.instagram.length > 1">
-          <a :href="`https://instagram.com/${item.instagram}`" target="_blank" rel="noopener noreferrer">
+          <a :href="`${item.instagram}`" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-instagram"></i> {{ item.instagram }}
           </a>
         </div>
           
         <div v-if="item.website && item.website.length > 1">
-          <a :href="item.website" target="_blank" rel="noopener noreferrer">
+          <a :href="`https://${item.website}`" target="_blank" rel="noopener noreferrer">
             🌐 {{ item.website }}
           </a>
         </div>
@@ -196,21 +204,27 @@
                   <!-- Shopee -->
                   <div v-if="item.shopee && item.shopee.length > 1">
                     <a :href="item.shopee" target="_blank" rel="noopener noreferrer">
-                      🛒 Shopee
+                      🛒 Shopee : {{ item.shopee }}
                     </a>
                   </div>
 
                   <!-- LinkedIn -->
                   <div v-if="item.linkedin && item.linkedin.length > 1">
                     <a :href="item.linkedin" target="_blank" rel="noopener noreferrer">
-                      💼 LinkedIn
+                  💼 LinkedIn : {{ item.linkedin }}
                     </a>
                   </div>
 
                   <!-- YouTube -->
                   <div v-if="item.youtube && item.youtube.length > 1">
                     <a :href="item.youtube" target="_blank" rel="noopener noreferrer">
-                      ▶️ YouTube
+                      ▶️ YouTube : {{ item.youtube }}
+                    </a>
+                  </div>
+                   <!-- Sumber -->
+                  <div v-if="item.sumber && item.sumber.length > 1">
+                    <a :href="item.sumber" target="_blank" rel="noopener noreferrer">
+                      📚 Sumber : {{ item.sumber }}
                     </a>
                   </div>
             </div>
@@ -256,6 +270,7 @@ const filters2 = ref({
   youtube: false
 })
 const filteredItems = computed(() => {
+  
   return directoryItems1.value.filter((item) => {
         // If Instagram filter is checked, require instagram length > 1
     if (filters2.value.instagram && (item.instagram.length <= 1)) {
