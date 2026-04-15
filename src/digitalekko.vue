@@ -12,18 +12,10 @@
           </div>
         </div>
 
-        <nav class="hidden items-center gap-8 md:flex">
-          <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-indigo-700">Beranda</a>
-          <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-indigo-700">Direktori</a>
-          <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-indigo-700">Kategori</a>
-          <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-indigo-700">Peta</a>
-          <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-indigo-700">Tentang</a>
-        </nav>
+       
 
         <div class="flex items-center gap-3">
-          <button class="hidden rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-indigo-200 hover:bg-indigo-50 sm:inline-flex">
-            Masuk
-          </button>
+          
           <button class="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_40px_rgba(79,70,229,0.18)] transition hover:bg-indigo-700">
             Tambah Data
           </button>
@@ -56,13 +48,7 @@
                   class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-400 focus:bg-white"
                 />
               </div>
-              <div>
-                <label class="mb-2 block text-sm font-semibold text-slate-600">Kategori</label>
-                <select v-model="filters.category" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-400 focus:bg-white">
-                  <option value="">Semua kategori</option>
-                  <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
-                </select>
-              </div>
+            
               <div>
                 <label class="mb-2 block text-sm font-semibold text-slate-600">Wilayah</label>
                 <select v-model="filters.region" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-400 focus:bg-white">
@@ -70,30 +56,34 @@
                   <option v-for="region in regions" :key="region" :value="region">{{ region }}</option>
                 </select>
               </div>
-              <div class="flex items-end">
-                <button @click="resetFilters" class="w-full rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700">
-                  Reset
-                </button>
-              </div>
+             
             </div>
           </div>
 
           <div class="mt-8 grid max-w-2xl grid-cols-2 gap-4 md:grid-cols-4">
             <div class="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm">
-              <div class="text-2xl font-bold text-slate-900">1500+</div>
+              <div class="text-2xl font-bold text-slate-900">{{ directoryItems1.length }}</div>
               <div class="mt-1 text-sm text-slate-500">Usaha terdaftar</div>
             </div>
             <div class="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm">
-              <div class="text-2xl font-bold text-slate-900">{{ categories.length }}</div>
-              <div class="mt-1 text-sm text-slate-500">Kategori</div>
+              <div class="text-2xl font-bold text-slate-900">{{ parekrafCount }} </div>
+              <div class="mt-1 text-sm text-slate-500">Bersumber dari Dinas Parekraf</div>
             </div>
             <div class="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm">
-              <div class="text-2xl font-bold text-slate-900">{{ regions.length }}</div>
-              <div class="mt-1 text-sm text-slate-500">Wilayah</div>
+              <div class="text-2xl font-bold text-slate-900">{{ shopeeCount}}</div>
+              <div class="mt-1 text-sm text-slate-500">Bersumber dari Shopee</div>
             </div>
             <div class="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm">
-              <div class="text-2xl font-bold text-slate-900">24/7</div>
-              <div class="mt-1 text-sm text-slate-500">Akses publik</div>
+              <div class="text-2xl font-bold text-slate-900">{{ googleMapCount }}</div>
+              <div class="mt-1 text-sm text-slate-500">Bersumber dari Google Maps</div>
+            </div>
+             <div class="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm">
+              <div class="text-2xl font-bold text-slate-900">{{ tokopediaCount }}</div>
+              <div class="mt-1 text-sm text-slate-500">Bersumber dari Tokopedia</div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm">
+              <div class="text-2xl font-bold text-slate-900">{{ youtubeCount }}</div>
+              <div class="mt-1 text-sm text-slate-500">Bersumber dari YouTube</div>
             </div>
           </div>
         </div>
@@ -107,6 +97,56 @@
                   <h3 class="mt-1 text-xl font-semibold">Sebaran Ekonomi Digital</h3>
                 </div>
                 <div class="rounded-2xl bg-white/10 px-3 py-1 text-sm">2026</div>
+              </div>
+              <div class="mt-6 space-y-4">
+                <div>
+                  <div class="mb-2 flex items-center justify-between text-sm">
+                    <span class="text-slate-300">Fotografi</span>
+                    <span class="font-semibold">{{fotografiPercentage.toFixed(1)}}%</span>
+                  </div>
+                  <div class="h-3 rounded-full bg-white/10">
+                   <div
+                    class="h-3 rounded-full bg-sky-400"
+                    :style="{ width: fotografiPercentage.toFixed(1) + '%' }"
+                  ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="mb-2 flex items-center justify-between text-sm">
+                    <span class="text-slate-300">Film Animasi dan Video</span>
+                    <span class="font-semibold">{{ filmanimasivideoPercentage.toFixed(1) }}%</span>
+                  </div>
+                  <div class="h-3 rounded-full bg-white/10">
+                    <div
+                      class="h-3 rounded-full bg-sky-400"
+                      :style="{ width: filmanimasivideoPercentage.toFixed(1) + '%' }"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="mb-2 flex items-center justify-between text-sm">
+                    <span class="text-slate-300">Aplikasi</span>
+                    <span class="font-semibold">{{ aplikasiPercentage.toFixed(1) }}%</span>
+                  </div>
+                  <div class="h-3 rounded-full bg-white/10">
+                    <div
+                      class="h-3 rounded-full bg-emerald-400"
+                      :style="{ width: aplikasiPercentage.toFixed(1) + '%' }"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="mb-2 flex items-center justify-between text-sm">
+                    <span class="text-slate-300">Lainnya</span>
+                    <span class="font-semibold">{{ lainnyaPercentage.toFixed(1) }}%</span>
+                  </div>
+                  <div class="h-3 rounded-full bg-white/10">
+                    <div
+                      class="h-3 rounded-full bg-amber-400"
+                      :style="{ width: lainnyaPercentage.toFixed(1) + '%' }"
+                    ></div>
+                  </div>
+                </div>
               </div>
 
              
@@ -269,6 +309,79 @@ const filters2 = ref({
   linkedin: false,
   youtube: false
 })
+
+const instagramCount = computed(() => {
+  return directoryItems1.value.filter(
+    item => item.instagram && item.instagram.length >= 1
+  ).length
+})
+
+const parekrafCount = computed(() => {
+  return directoryItems1.value.filter(
+    item => item.sumber === 'Dinas Parekraf'
+  ).length
+})
+
+const shopeeCount = computed(() => {
+  return directoryItems1.value.filter(
+    item => item.sumber === 'Shopee'
+  ).length
+})
+
+const googleMapCount = computed(() => {
+  return directoryItems1.value.filter(
+    item => item.sumber === 'GoogleMap'
+  ).length
+})
+
+const tokopediaCount = computed(() => {
+  return directoryItems1.value.filter(
+    item => item.sumber === 'Tokopedia'
+  ).length
+})
+const youtubeCount = computed(() => {
+  return directoryItems1.value.filter(
+    item => item.sumber === 'Youtube'
+  ).length
+})
+
+const fotografiCount = computed(() => {
+  return directoryItems1.value.filter(
+    item => item.subsektor === 'Fotografi'
+  ).length})
+
+const fotografiPercentage = computed(() => {
+  if (directoryItems1.value.length === 0) return 0
+  return (fotografiCount.value / directoryItems1.value.length) * 100
+})
+
+const filmanimasivideoCount = computed(() => {
+return directoryItems1.value.filter(
+    item => item.subsektor === 'Film Animasi dan Video'
+  ).length})
+const filmanimasivideoPercentage = computed(() => {
+  if (directoryItems1.value.length === 0) return 0
+  return (filmanimasivideoCount.value / directoryItems1.value.length) * 100
+})
+
+const aplikasiCount = computed(() => {
+return directoryItems1.value.filter(
+    item => item.subsektor === 'Aplikasi'
+  ).length})
+const aplikasiPercentage = computed(() => {
+  if (directoryItems1.value.length === 0) return 0
+  return (aplikasiCount.value / directoryItems1.value.length) * 100
+})
+const lainnyaCount = computed(() => {
+ if (directoryItems1.value.length === 0) return 0
+  return (directoryItems1.value.length - fotografiCount.value - filmanimasivideoCount.value - aplikasiCount.value)
+})
+const lainnyaPercentage = computed(() => {
+  if (directoryItems1.value.length === 0) return 0
+  return (lainnyaCount.value / directoryItems1.value.length) * 100
+})
+
+
 const filteredItems = computed(() => {
   
   return directoryItems1.value.filter((item) => {
@@ -288,6 +401,26 @@ const filteredItems = computed(() => {
     if (filters2.youtube && (!item.youtube || item.youtube.length <= 1)) {
       return false
     }
+     // Filter Region
+    if (filters.value.region) {
+      if (!item.kabupaten || item.kabupaten.toLowerCase() !== filters.value.region.toLowerCase()) {
+        return false
+      }
+    }
+
+     // Search berdasarkan keyword
+    if (filters.value.keyword) {
+      const q = filters.value.keyword.toLowerCase()
+      return (
+        (item.nama_usaha && item.nama_usaha.toLowerCase().includes(q)) ||
+        (item.alamat && item.alamat.toLowerCase().includes(q)) ||
+        (item.kabupaten && item.kabupaten.toLowerCase().includes(q)) ||
+        (item.subsektor && item.subsektor.toLowerCase().includes(q)) ||
+        (item.sumber && item.sumber.toLowerCase().includes(q))
+      )
+    }
+
+
     return true
 
     })
@@ -305,7 +438,7 @@ const categories = [
   'Marketplace SaaS'
 ]
 
-const regions = ['Denpasar', 'Badung', 'Gianyar', 'Tabanan']
+const regions = ['Denpasar', 'Badung', 'Gianyar', 'Tabanan', 'Bangli', 'Karangasem', 'Buleleng', 'Jembrana']
 const quickTabs = ['Startup', 'UMKM Digital', 'Instagram', 'Kreator']
 const businessModels = ['B2B', 'B2C', 'Marketplace', 'Subscription']
 
@@ -321,7 +454,7 @@ const filters = ref({
 })
 
 const distributionData = [
-  { label: 'Marketplace & E-Commerce', value: 38, barClass: 'bg-indigo-400' },
+  { label: 'Marketplace & E-Commerce', value: 50, barClass: 'bg-indigo-400' },
   { label: 'Jasa Teknologi', value: 27, barClass: 'bg-sky-400' },
   { label: 'Edutech & Konten', value: 19, barClass: 'bg-emerald-400' },
   { label: 'Fintech', value: 16, barClass: 'bg-amber-400' }
